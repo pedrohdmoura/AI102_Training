@@ -8,8 +8,8 @@ import os
 import sys
 import time
 
-subscription_key = "06908040e31e41d5b4018cacda8fbfb6"
-endpoint = "https://aiservices-multi-sdk.cognitiveservices.azure.com/"
+subscription_key = os.environ['kkk']
+endpoint = os.environ['xxx']
 
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
@@ -20,12 +20,12 @@ print("")
 Describe an Image - remote
 This example describes the contents of an image with the confidence score.
 '''
-print("===== Describe an image - remote =====")
 # Call API
 description_results = computervision_client.describe_image(remote_image_url)
 tags_result_remote = computervision_client.tag_image(remote_image_url)
 detect_domain_results_landmarks = computervision_client.analyze_image_by_domain("landmarks", remote_image_url)
 print("===== Detect Domain-specific Content - Remote =====")
+print("")
 print("Landmarks in the remote image:")
 if len(detect_domain_results_landmarks.result["landmarks"]) == 0:
     print("No landmarks detected.")
@@ -33,9 +33,10 @@ else:
     for landmark in detect_domain_results_landmarks.result["landmarks"]:
         print(landmark["name"])
 
-
+print("")
 # Get the captions (descriptions) from the response, with confidence level
 print("Description of remote image: ")
+print("")
 if len(description_results.captions) == 0:
     print("No description detected.")
 else:
